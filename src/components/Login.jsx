@@ -1,6 +1,9 @@
 import { Button, Checkbox, Form, Input, notification } from 'antd';
+import React, { useState } from 'react';
 
-const Login = () => {
+const Login = ({ changeStatus }) => {
+	const [good, setGood] = useState(false);
+
 	const onFinish = values => {
 		console.log('Success:', values);
 
@@ -11,6 +14,21 @@ const Login = () => {
 			},
 			body: JSON.stringify(values),
 		});
+
+		// Тут делаю новыый фетч запрос
+
+		fetch('http://127.0.0.1:1488/status')
+			.then(response => response.json())
+			.then(data => {
+				if (data.login !== 'badname') {
+					// Вызываем функцию changeStatus с аргументом true
+					changeStatus();
+				}
+			})
+			.catch(error => {
+				console.error('Ошибка при получении данных:', error);
+				// В случае ошибки не вызываем функцию changeStatus
+			});
 
 		openGoodNotification('success');
 	};
@@ -30,8 +48,8 @@ const Login = () => {
 
 	const openGoodNotification = type => {
 		api[type]({
-			message: 'Успешный вход',
-			description: 'Данные отправлены.',
+			message: 'Данные отправлены',
+			description: 'Данные успешно ушли на сервер.',
 		});
 	};
 
@@ -101,4 +119,5 @@ const Login = () => {
 		</Form>
 	);
 };
+
 export default Login;
