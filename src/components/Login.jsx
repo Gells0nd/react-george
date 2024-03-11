@@ -1,9 +1,7 @@
 import { Button, Checkbox, Form, Input, notification } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 
 const Login = ({ changeStatus }) => {
-	const [good, setGood] = useState(false);
-
 	const onFinish = values => {
 		console.log('Success:', values);
 

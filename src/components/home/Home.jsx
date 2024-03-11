@@ -43,6 +43,7 @@ const Home = () => {
 
 	return (
 		<main>
+			{status && <h1>Ура!</h1>}
 			<header className={styles.header}>
 				<div className={styles.wrapper}>
 					<div className={styles.logoBlock}>
