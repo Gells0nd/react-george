@@ -1,8 +1,21 @@
-import { Button, Form, Input, notification, Select } from 'antd';
+import { Button, DatePicker, Form, Input, Select, notification } from 'antd';
 
 const Register = () => {
+	const onChange = (date, dateString) => {
+		console.log(date, dateString);
+	};
+
 	const onFinish = values => {
 		console.log('Success:', values);
+
+		fetch('http://127.0.0.1:1488/post', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8',
+			},
+			body: JSON.stringify(values),
+		});
+
 		openGoodNotification('success');
 	};
 
@@ -86,7 +99,24 @@ const Register = () => {
 
 			<Form.Item
 				wrapperCol={{
-					offset: 9,
+					offset: 3,
+					span: 16,
+				}}
+				name='date'
+				label='Дата рождения'
+				rules={[
+					{
+						required: true,
+					},
+				]}
+			>
+				<DatePicker onChange={onChange} />
+			</Form.Item>
+
+			<Form.Item
+				style={{ marginLeft: -19 }}
+				wrapperCol={{
+					offset: 7,
 					span: 16,
 				}}
 			>

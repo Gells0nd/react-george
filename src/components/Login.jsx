@@ -3,6 +3,15 @@ import { Button, Checkbox, Form, Input, notification } from 'antd';
 const Login = () => {
 	const onFinish = values => {
 		console.log('Success:', values);
+
+		fetch('http://127.0.0.1:1488/post', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json;charset=utf-8',
+			},
+			body: JSON.stringify(values),
+		});
+
 		openGoodNotification('success');
 	};
 

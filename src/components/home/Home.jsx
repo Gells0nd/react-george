@@ -1,9 +1,12 @@
-import { Button, Modal } from 'antd';
+import { Button, ColorPicker, Modal } from 'antd';
+import { useState } from 'react';
 import Login from '../Login';
 import Register from '../Register';
 import styles from './Home.module.css';
 
 const Home = () => {
+	const [color, setColor] = useState('#333');
+
 	const log = () => {
 		Modal.confirm({
 			title: 'Вход в Личный Кабинет',
@@ -28,11 +31,26 @@ const Home = () => {
 		});
 	};
 
+	const handleColorChange = newColor => {
+		const hexColor = newColor.toHexString(); // Преобразование цвета в HEX
+		setColor(hexColor); // Установка нового цвета
+	};
+
 	return (
 		<main>
 			<header className={styles.header}>
 				<div className={styles.wrapper}>
-					<h1 className={styles.logo}>George</h1>
+					<div className={styles.logoBlock}>
+						<h1 style={{ color: color }} className={styles.logo}>
+							George
+						</h1>
+						<ColorPicker
+							style={{ marginBottom: -7 }}
+							value={color}
+							onChange={handleColorChange} // Обработчик изменения цвета
+							showText
+						/>
+					</div>
 					<ul className={styles.nav}>
 						<li className={styles.navItem}>
 							<Button onClick={log}>Авторизация</Button>
@@ -43,7 +61,6 @@ const Home = () => {
 					</ul>
 				</div>
 			</header>
-			{/* <Register /> */}
 		</main>
 	);
 };
