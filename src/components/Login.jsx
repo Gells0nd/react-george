@@ -15,20 +15,8 @@ const Login = ({ changeStatus }) => {
 
 		// Тут делаю новыый фетч запрос
 
-		fetch('http://127.0.0.1:1488/status')
-			.then(response => response.json())
-			.then(data => {
-				if (data.login !== 'badname') {
-					// Вызываем функцию changeStatus с аргументом true
-					changeStatus();
-				}
-			})
-			.catch(error => {
-				console.error('Ошибка при получении данных:', error);
-				// В случае ошибки не вызываем функцию changeStatus
-			});
-
-		openGoodNotification('success');
+		changeStatus();
+		// openGoodNotification('success');
 	};
 
 	const onFinishFailed = errorInfo => {
@@ -46,7 +34,7 @@ const Login = ({ changeStatus }) => {
 
 	const openGoodNotification = type => {
 		api[type]({
-			message: 'Данные отправлены',
+			message: 'Успешный вход!',
 			description: 'Данные успешно ушли на сервер.',
 		});
 	};
