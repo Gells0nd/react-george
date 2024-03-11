@@ -1,44 +1,58 @@
-import { Button, ColorPicker, Modal } from 'antd';
-import React, { useState } from 'react';
-import Login from '../Login';
-import Register from '../Register';
-import styles from './Home.module.css';
+import { Button, ColorPicker, Modal } from 'antd'; // Импортируем необходимые компоненты из библиотеки Ant Design
+import React, { useState } from 'react'; // Импортируем React и хук useState для работы с состоянием
+import Login from '../Login'; // Импортируем компонент Login
+import Register from '../Register'; // Импортируем компонент Register
+import styles from './Home.module.css'; // Импортируем CSS-модуль для стилей компонента Home
 
+// Определяем функциональный компонент Home
 const Home = () => {
+	// Состояние для статуса пользователя (вошел в систему или нет)
 	const [status, setStatus] = useState(false);
+
+	// Состояние для настройки цвета
 	const [color, setColor] = useState('#333');
 
+	// Функция для обработки изменения цвета в компоненте ColorPicker
 	const handleColorChange = newColor => {
+		// Извлекаем шестнадцатеричное значение цвета из объекта цвета
 		const hexColor = newColor.toHexString();
+		// Обновляем состояние цвета новым значением цвета
 		setColor(hexColor);
 	};
 
+	// Функция для изменения статуса пользователя
 	const changeStatus = () => {
+		// Устанавливаем статус пользователя на true (вошел в систему)
 		setStatus(true);
+		// Закрываем все модальные окна
 		Modal.destroyAll();
 	};
 
+	// Функция для открытия модального окна входа
 	const log = () => {
 		Modal.confirm({
-			title: 'Вход в Личный Кабинет',
+			// Открываем модальное окно подтверждения с формой входа
+			title: 'Вход в Личный Кабинет', // Заголовок модального окна
 			content: (
 				<div style={{ marginLeft: -35 }}>
 					<Login changeStatus={changeStatus} />
 				</div>
-			),
-			footer: (_, { OkBtn, CancelBtn }) => <></>,
+			), // Содержимое модального окна, в данном случае компонент Login
+			footer: (_, { OkBtn, CancelBtn }) => <></>, // Футер модального окна, пока что пустой
 		});
 	};
 
+	// Функция для открытия модального окна регистрации
 	const reg = () => {
 		Modal.confirm({
-			title: 'Регистрация',
+			// Открываем модальное окно подтверждения с формой регистрации
+			title: 'Регистрация', // Заголовок модального окна
 			content: (
 				<div style={{ marginLeft: -35 }}>
 					<Register />
 				</div>
-			),
-			footer: (_, { OkBtn, CancelBtn }) => <></>,
+			), // Содержимое модального окна, в данном случае компонент Register
+			footer: (_, { OkBtn, CancelBtn }) => <></>, // Футер модального окна, пока что пустой
 		});
 	};
 
@@ -230,4 +244,4 @@ const Home = () => {
 	);
 };
 
-export default Home;
+export default Home; // Экспортируем компонент Home по умолчанию
