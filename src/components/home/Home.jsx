@@ -61,14 +61,18 @@ const Home = () => {
 							showText
 						/>
 					</div>
-					<ul className={styles.nav}>
-						<li className={styles.navItem}>
-							<Button onClick={log}>Авторизация</Button>
-						</li>
-						<li className={styles.navItem}>
-							<Button onClick={reg}>Регистрация</Button>
-						</li>
-					</ul>
+					{status ? (
+						''
+					) : (
+						<ul className={styles.nav}>
+							<li className={styles.navItem}>
+								<Button onClick={log}>Авторизация</Button>
+							</li>
+							<li className={styles.navItem}>
+								<Button onClick={reg}>Регистрация</Button>
+							</li>
+						</ul>
+					)}
 				</div>
 			</header>
 			{status && (
